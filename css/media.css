@@ -1,0 +1,96 @@
+/* скрываем чекбокс и блоки .dws-menu */
+.dws-menu [type="checkbox"],
+.dws-menu label.toggleSubmenu{
+    display: none;
+}
+/* стилизуем кнопку label */
+.dws-menu label.toggleMenu{
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c9c9c9+0,f6f6f6+2,c4c5c7+98,757577+100;Custom+3 */
+    background: rgb(201,201,201); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(201,201,201,1) 0%, rgba(246,246,246,1) 2%, rgba(196,197,199,1) 98%, rgba(117,117,119,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(201,201,201,1) 0%,rgba(246,246,246,1) 2%,rgba(196,197,199,1) 98%,rgba(117,117,119,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(201,201,201,1) 0%,rgba(246,246,246,1) 2%,rgba(196,197,199,1) 98%,rgba(117,117,119,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9c9c9', endColorstr='#757577',GradientType=0 ); /* IE6-9 */
+    /* прячем меню в десктопной версии */ 
+    display: none;
+    padding: 15px 40px;
+    /* текст заглавными буквами */
+    text-transform: uppercase;
+    font-size: 14px;
+    /* при наведении */
+    cursor: pointer;
+    /* выравняем иконку */
+    position: relative;
+}
+/* позиционируем иконку в классе fa (прописали в label) */
+.dws-menu label.toggleMenu .fa{
+    position: absolute;
+    top: 15px;
+    left: 12px;
+    font-size: 18px;
+}
+@media all and (max-width: 800px){
+    .dws-menu{
+        /* чтобы сформировать отступы от краёв */
+        overflow: hidden;
+    }
+    .dws-menu ul {
+        display: block;
+        /* прячем все пункты и оставляем одну кнопку "меню" (анимация) */
+        max-height: 0;
+        transition: max-height 0.3s;
+    }
+    .dws-menu li>ul li ul{
+        position: absolute;
+        right: auto;
+        top: auto;
+    }
+    /* отображаем меню в мобильной версии */
+    .dws-menu label.toggleMenu{
+        display: block;
+    }
+    /* отслеживаем щелчок мыши и меняем цвет */
+    input.toggleMenu:checked + label.toggleMenu{
+        background: #000;
+        /* меняем цвет шрифта */
+        color: #fff;
+    }
+    /* отображение основного списка меню */
+    input.toggleMenu:checked ~ ul,
+    input.toggleSubmenu:checked ~ ul{
+        display: block;
+        position: relative;
+        /* анимация появления подменю */
+        max-height: 5000px;
+        transition: max-height 2s ease-in;
+    }
+    /* отображаем пункты по щелчку */
+    .dws-menu label.toggleSubmenu{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        display: block;
+    }
+    input.toggleSubmenu:checked ~ a{
+        background: #454547;
+        color: #fff;
+    }
+    /* создаём иконку треугольника, чтобы видеть какой из пунктов имеет подменю */
+    .dws-menu label.toggleSubmenu .fa:before{
+        content: "\f0d7";
+        color: #454547;
+    }
+    .dws-menu label.toggleSubmenu .fa{
+        position: absolute;
+        top: 15px;
+        right: 30px;
+    }
+    /* чтобы вторая иконка треугольника показывала стрелку вверх */
+    .dws-menu input.toggleSubmenu:checked ~ label.toggleSubmenu .fa::before{
+        content: "\f0d8";
+        color: #ffffff;
+    }
+}
